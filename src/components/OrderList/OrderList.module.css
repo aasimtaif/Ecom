@@ -1,0 +1,11 @@
+.order {
+    margin: 10px;
+    border: 1px solid;
+    padding: 10px;
+  }
+  .totalAmount{
+    color: rgb(8, 59, 152);
+    font-weight: 600;
+    margin-top: 1rem;
+    font-size: px;
+  }

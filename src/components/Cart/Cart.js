@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux'
 // import CartContext from '../../context/CartContext';
 import ReduxAddToCart from '../ReduxAddToCart';
+import { Link } from 'react-router-dom';
 import './Cart.css';
 
 function Cart() {
@@ -26,8 +27,9 @@ function Cart() {
             <div className='cart'>No items in the cart!</div>
         );
     } else {
-        return (
+        return (<>
             <ol className='cart'>
+
                 {cartList.map(cartItem => (
                     <li key={cartItem.id} className='cartItem'>
                         <div>{cartItem.title}</div>
@@ -39,6 +41,7 @@ function Cart() {
                 <div>Cart Total = ₹{totalPrice}</div>
                 
             </ol>
+            </>
         )
     }
 }

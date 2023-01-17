@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCategries } from '../../redux/categories';
 import CategoriesLink from '../CategoriesLink';
+import ToggleCart from '../ToggleCart';
+import styles from './Categories.module.css'
+
 
 function Categories() {
     const dispatch = useDispatch()
@@ -24,30 +27,25 @@ function Categories() {
         //     }
         // }
 
-       dispatch( loadCategries());
+        dispatch(loadCategries());
     }, []);
 
     if (categories.isLoading) {
-        return (<>
-            Laoding Categories.....
-        </>)
-    } else
-        if (categories.error) {
-            return (<> 
-            Sorry Error ....
-            </>)
-        } else {
-            return (
-            <>
-                <ul>
+        return <div>Loading Categories...</div>;
+    } else if (categories.error) {
+        return <div>Failed to load categories</div>
+    } else {
+        return (
+            <div className={styles.root}>
+                <ul className={styles.list}>
                     {categories.categories.map(category => (
-                        < CategoriesLink key={category.id} category= {category} />
+                        <CategoriesLink key={category.id} category={category} />
                     ))}
                 </ul>
-            </>
-            )
-        }
-
+                <ToggleCart />
+            </div>
+        );
+    }
 }
 
-export default Categories
+export default Categories;

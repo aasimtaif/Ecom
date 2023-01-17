@@ -7,7 +7,7 @@ import { checkoutSuccess, placeOrder } from '../../redux/store';
 
 function CheckoutButton() {
     const dispatch = useDispatch();
-    const history = useNavigate();
+    const navigate = useNavigate();
     const isSubmitting = useSelector(state => state.cart.isSubmitting);
     const isSuccess = useSelector(state => state.cart.isSubmitSuccess);
 
@@ -18,7 +18,7 @@ function CheckoutButton() {
     useEffect(() => {
         // Navigate to /orders
         if (isSuccess) {
-            history.push(`/orders/`);
+            navigate(`/orders/`);
             dispatch(checkoutSuccess());
         }
     }, [isSuccess]);

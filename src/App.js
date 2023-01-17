@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toggleCart } from './redux/store';
 import ProductList from './components/ProductList/ProductList';
 import Cart from './components/Cart';
 import CartContext from './context/CartContext';
 import Categories from './components/Categories/Categories';
-import {Routes , Route} from  "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
+import Orders from './pages/OrderPage/Orders';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CartPage from './pages/CartPage/CartPage';
-import ToggleCart from './components/ToggleCart';
+
 
 
 
@@ -17,9 +18,9 @@ import ToggleCart from './components/ToggleCart';
 
 
 function App() {
-const  isCartOpen = useSelector(state => state.cart.isCartOpen);
-console.log(isCartOpen)
-const dispatch = useDispatch();
+  const isCartOpen = useSelector(state => state.cart.isCartOpen);
+  console.log(isCartOpen)
+  const dispatch = useDispatch();
   const [cart, setCart] = useState({});
   const [showCart, setShowCart] = useState(false);
   function increaseQuantity(product) {
@@ -40,7 +41,7 @@ const dispatch = useDispatch();
 
     // setCart(newCart);
   }
-  const  cartToggle = () =>{
+  const cartToggle = () => {
     setShowCart(!showCart)
     dispatch(toggleCart(!showCart))
   }
@@ -65,21 +66,23 @@ const dispatch = useDispatch();
       value={{ cart, increaseQuantity, decreaseQuantity }}
     >
 
-      
-      <div>
-<ToggleCart/>
 
-    <Routes>
-      <Route exact = {true} path='/cart' element = {<CartPage />}/>
-      
-        {/* <button onClick={cartToggle} >
+      <div>
+
+
+        <Routes>
+          <Route exact={true} path='/cart' element={<CartPage />} />
+
+          {/* <button onClick={cartToggle} >
           {isCartOpen? "close Cart" : "open cart"}
         </button>
         {
           isCartOpen? <Cart /> : null
         } */}
-        <Route  path='/' element = { <ProductPage />}/>
-        <Route path = '/categories/:categoryId' element = { <ProductPage />}/>
+          <Route path='/orders/' element={<Orders />} />
+
+          <Route path='/' element={<ProductPage />} />
+          <Route path='/categories/:categoryId' element={<ProductPage />} />
         </Routes>
       </div>
     </CartContext.Provider>
